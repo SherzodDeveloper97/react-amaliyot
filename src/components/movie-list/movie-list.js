@@ -1,14 +1,18 @@
 import "./movie-list.css";
 import MovieListItem from "../movie-list-item/movie-list-item";
+import { Component } from "react";
 
-const MovieList = ({data}) => {
-  return (
-    <ul className='movie-list list-group'>
-			{data.map((item,index) => {
-				return <MovieListItem key={index} {...item} />
-			})}
-		</ul>
-  )
+class MovieList extends Component {
+	render(){
+		const {data} = this.props;
+		return (
+			<ul className='movie-list list-group'>
+					{data.map((item,index) => {
+						return <MovieListItem key={index} {...item} />
+					})}
+				</ul>
+		  )
+	}
 }
 
 export default MovieList;
