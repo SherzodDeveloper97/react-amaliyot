@@ -15,18 +15,21 @@ class App extends Component {
         filmName: "Empire of Osman",
         views: 811,
         favourite:false,
+        like: false,
       },
       {
         id: 2,
         filmName: "Ertugrul",
         views: 995,
         favourite:false,
+        like: false,
       },
       {
         id: 3,
         filmName: "Omar",
         views: 745,
-        favourite:true,
+        favourite:false,
+        like: false,
       },
     ]
    } 
@@ -58,17 +61,37 @@ class App extends Component {
     })
   }
 
+  onToggleProp = (id,prop) => {
+    // console.log(prop);
+    // console.log(`Favourite ${id}`)
+    this.setState(({data}) => {
+      const newArr = data.map(item => {
+        if(item.id === id){
+          return { ...item, [prop]:!item[prop]}
+        }
+        return item
+      })
+      // console.log(newArr);
+      return {
+        data: newArr,
+      }
+    })
+  }
+
+
   render() { 
     const {data} = this.state;
+    const allMoviesCount = data.length;
+    const favouriteMovieCount = data.filter(c => c.favourite).length;
     return (
       <div className="App font-monospace">
         <div className="content">
-          <AppInfo />
+          <AppInfo favouriteMovieCount={favouriteMovieCount} allMoviesCount={allMoviesCount} />
           <div className="search-panel">
             <SearchPanel />
             <AppFilter />
           </div>
-          <MovieList data={data} onDelete={this.onDelete} />
+          <MovieList onToggleProp={this.onToggleProp} data={data} onDelete={this.onDelete} />
           <MoviesAddForm addForm={this.addForm} />
         </div>
       </div>

@@ -7,29 +7,28 @@ class MovieListItem extends Component{
 		this.state = {favourite: false, like: false}
 	}
 
-	onFavourite = () => {
-		this.setState(({favourite}) => ({
-			favourite: !favourite,
-		}))
-	}
+	// onFavourite = () => {
+	// 	this.setState(({favourite}) => ({
+	// 		favourite: !favourite,
+	// 	}))
+	// }
 
-	onLike = () => {
-		this.setState(({like}) => (
-			{
-				like: !like,
-			}
-		))
-	}
+	// onLike = () => {
+	// 	this.setState(({like}) => (
+	// 		{
+	// 			like: !like,
+	// 		}
+	// 	))
+	// }
 
 	render() {
-		const {filmName,views,onDelete} = this.props;
-		const {favourite, like} = this.state;
+		const {filmName,views,onDelete,onToggleProp,favourite,like} = this.props;
 		return (
 			<li className={`list-group-item d-flex justify-content-between ${favourite && "favourite"} ${like && "like"}`}>
-					<span onClick={this.onLike} className='list-group-item-label'>{filmName}</span>
+					<span data-toggle="like" onClick={onToggleProp} className='list-group-item-label'>{filmName}</span>
 					<input type='number' className='list-group-item-input' defaultValue={views} />
 					<div className='d-flex justify-content-center align-items-center'>
-						<button type='button' className='btn-cookie btn-sm ' onClick={this.onFavourite}>
+						<button type='button' data-toggle="favourite" className='btn-cookie btn-sm ' onClick={onToggleProp}>
 							<i className='fas fa-cookie'></i>
 						</button>
 		

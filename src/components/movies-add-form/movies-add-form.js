@@ -19,7 +19,7 @@ class MoviesAddForm extends Component {
 
 	addFormHandler = (e) => {
 		e.preventDefault();
-		this.props.addForm({filmName:this.state.filmName,views: this.state.views, id: uuidv4(), favourite:false})
+		this.props.addForm({filmName:this.state.filmName,views: this.state.views, id: uuidv4(), favourite:false, like: false})
 		this.setState({
 			filmName: "",
 			views: "",
