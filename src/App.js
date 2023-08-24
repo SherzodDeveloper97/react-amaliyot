@@ -6,28 +6,60 @@ import AppFilter from "./components/app-filter/app-filter";
 import MovieList from "./components/movie-list/movie-list";
 import MoviesAddForm from "./components/movies-add-form/movies-add-form";
 
-class App extends Component {
-  state = {  } 
 
-  data = [
-    {
-      name: "Empire of Osman",
-      views: 811,
-      favourite:false,
-    },
-    {
-      name: "Ertugrul",
-      views: 995,
-      favourite:false,
-    },
-    {
-      name: "Omar",
-      views: 745,
-      favourite:true,
-    },
-  ];
+class App extends Component {
+  state = { 
+    data : [
+      {
+        id: 1,
+        filmName: "Empire of Osman",
+        views: 811,
+        favourite:false,
+      },
+      {
+        id: 2,
+        filmName: "Ertugrul",
+        views: 995,
+        favourite:false,
+      },
+      {
+        id: 3,
+        filmName: "Omar",
+        views: 745,
+        favourite:true,
+      },
+    ]
+   } 
+
+  
+
+  onDelete = (id) => {
+    this.setState(({data}) => {
+      // const index = data.findIndex((c) => (c.id) === id);
+      // console.log(index);
+      // data.splice(index, 1);
+      const newArr = data.filter(c => c.id !== id);
+      // console.log(newArr);
+
+      return {
+        data: newArr,
+      }
+    })
+  }
+
+  addForm = (item) => {
+    const {data} = this.state;
+    this.setState(({data}) => {
+      const newData = [...data, item]
+      // console.log(newData);
+      return {
+        data: newData,
+      }
+    })
+  }
 
   render() { 
+    const {data} = this.state;
     return (
       <div className="App font-monospace">
         <div className="content">
@@ -36,8 +68,8 @@ class App extends Component {
             <SearchPanel />
             <AppFilter />
           </div>
-          <MovieList data={this.data} />
-          <MoviesAddForm />
+          <MovieList data={data} onDelete={this.onDelete} />
+          <MoviesAddForm addForm={this.addForm} />
         </div>
       </div>
     );
