@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import './movies-add-form.css';
+import './movies-add-form.scss';
 import { v4 as uuidv4 } from 'uuid';
 
 class MoviesAddForm extends Component {
