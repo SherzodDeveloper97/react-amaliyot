@@ -1,0 +1,15 @@
+.counter-box{
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 50px;
+}
+button{
+    margin: 10px;
+}
+.form{
+    margin-top: 30px;
+}
+input{
+    margin-left: 15px;
+}
