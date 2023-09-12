@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './App.scss';
 import AppInfo from "./components/app-info/app-info";
 import SearchPanel from "./components/search-panel/search-panel";
@@ -7,9 +7,10 @@ import MovieList from "./components/movie-list/movie-list";
 import MoviesAddForm from "./components/movies-add-form/movies-add-form";
 
 const App = () => {
-  const [data, setData] = useState(arr);
+  const [data, setData] = useState([]);
   const [term, setTerm] = useState("");
   const [filter, setFilter] = useState("all");
+  const [isLoading, setIsLoading] = useState(false);
 
   const onDelete = (id) => {
     const newArr = data.filter(c => c.id !== id);
@@ -35,7 +36,7 @@ const App = () => {
     if(term === 0){
       return arr;
     }
-    return arr.filter(item => item.filmName.toLowerCase().indexOf(term) > -1);
+    return arr.filter(item => item.name.toLowerCase().indexOf(term) > -1);
   }
 
   const filterHandler = (arr,filter) => {
@@ -56,6 +57,19 @@ const App = () => {
   const updateFilterHandler = (filter) => {
     setFilter(filter);
   }
+
+  // API bilan ishlash:
+  useEffect(() => {
+    setIsLoading(true); 
+    fetch('https://jsonplaceholder.typicode.com/todos?_start=0&_limit=5')
+      .then(response => response.json())
+      .then(json => {
+        const newArr = json.map(item => ({name: item.title, id: item.id, views: item.id * 10,favourite:false,like: false,}))
+        console.log(newArr);
+        setData(newArr);
+      })
+      .finally(() => setIsLoading(false))
+  }, [])
   
   return (
     <div className="App font-monospace">
@@ -65,6 +79,7 @@ const App = () => {
           <SearchPanel updateHandler={updateHandler} />
           <AppFilter filter={filter} updateFilterHandler={updateFilterHandler} />
         </div>
+        <div style={{textAlign:"center", marginTop:"30px"}}>{isLoading && "Loading..."}</div>
         <MovieList onToggleProp={onToggleProp} data={filterHandler(searchHandler(data,term),filter)} onDelete={onDelete} />
         <MoviesAddForm addForm={addForm} />
       </div>
@@ -82,21 +97,21 @@ const App = () => {
 //     data : [
 //       {
 //         id: 1,
-//         filmName: "Empire of Osman",
+//         name: "Empire of Osman",
 //         views: 811,
 //         favourite:false,
 //         like: false,
 //       },
 //       {
 //         id: 2,
-//         filmName: "Ertugrul",
+//         name: "Ertugrul",
 //         views: 995,
 //         favourite:false,
 //         like: false,
 //       },
 //       {
 //         id: 3,
-//         filmName: "Omar",
+//         name: "Omar",
 //         views: 745,
 //         favourite:false,
 //         like: false,
@@ -110,7 +125,7 @@ const App = () => {
 //     if(term.length === 0){
 //       return arr;
 //     }
-//     return arr.filter(item => item.filmName.toLowerCase().indexOf(term) > -1);
+//     return arr.filter(item => item.name.toLowerCase().indexOf(term) > -1);
 //   } 
 
 //   updateHandler = (term) => {
@@ -201,21 +216,21 @@ export default App;
 const arr = [
   {
     id: 1,
-    filmName: "Empire of Osman",
+    name: "Empire of Osman",
     views: 811,
     favourite:false,
     like: false,
   },
   {
     id: 2,
-    filmName: "Ertugrul",
+    name: "Ertugrul",
     views: 995,
     favourite:false,
     like: false,
   },
   {
     id: 3,
-    filmName: "Omar",
+    name: "Omar",
     views: 745,
     favourite:false,
     like: false,

@@ -1,14 +1,14 @@
 import "./movie-list-item.scss";
 import { Component, useState } from "react";
 
-const MovieListItem = ({filmName,views,onDelete,onToggleProp,favourite,like}) => {
+const MovieListItem = ({name,views,onDelete,onToggleProp,favourite,like}) => {
 	const [favouriteState, setFavourite] = useState(false);
 	const [likeState, setLike] = useState(false);
 
 
 	return (
 		<li className={`list-group-item d-flex justify-content-between ${favourite && "favourite"} ${like && "like"}`}>
-				<span data-toggle="like" onClick={onToggleProp} className='list-group-item-label'>{filmName}</span>
+				<span data-toggle="like" onClick={onToggleProp} className='list-group-item-label'>{name}</span>
 				<input type='number' className='list-group-item-input' defaultValue={views} />
 				<div className='d-flex justify-content-center align-items-center'>
 					<button type='button' data-toggle="favourite" className='btn-cookie btn-sm ' onClick={onToggleProp}>
@@ -49,10 +49,10 @@ const MovieListItem = ({filmName,views,onDelete,onToggleProp,favourite,like}) =>
 // 	// }
 
 // 	render() {
-// 		const {filmName,views,onDelete,onToggleProp,favourite,like} = this.props;
+// 		const {name,views,onDelete,onToggleProp,favourite,like} = this.props;
 // 		return (
 // 			<li className={`list-group-item d-flex justify-content-between ${favourite && "favourite"} ${like && "like"}`}>
-// 					<span data-toggle="like" onClick={onToggleProp} className='list-group-item-label'>{filmName}</span>
+// 					<span data-toggle="like" onClick={onToggleProp} className='list-group-item-label'>{name}</span>
 // 					<input type='number' className='list-group-item-input' defaultValue={views} />
 // 					<div className='d-flex justify-content-center align-items-center'>
 // 						<button type='button' data-toggle="favourite" className='btn-cookie btn-sm ' onClick={onToggleProp}>

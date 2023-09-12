@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const MoviesAddForm = ({addForm}) => {
 	const [state, setState] = useState({
-		filmName:"",
+		name:"",
 		views: "",
 	})
 
@@ -13,12 +13,12 @@ const MoviesAddForm = ({addForm}) => {
 	}
 
 	const addFormHandler = (e) => {
-		if(state.filmName === "" || state.views === "") return
+		if(state.name === "" || state.views === "") return
 		e.preventDefault();
-		const data = {filmName: state.filmName, views: state.views, id: uuidv4(), favourite: false, like:false}
+		const data = {name: state.name, views: state.views, id: uuidv4(), favourite: false, like:false}
 		addForm(data);
 		setState({
-			filmName: "",
+			name: "",
 			views: "",
 		})
 	}
@@ -27,7 +27,7 @@ const MoviesAddForm = ({addForm}) => {
 		<div className='app-add-form'>
 			<h3>Yangi kino qo'shish</h3>
 			<form className='add-form d-flex' onSubmit={addFormHandler}>
-				<input type='text' value={state.filmName} name="filmName" onChange={inputValueHandler} className='form-control new-post-label' placeholder='Qanday kino?' />
+				<input type='text' value={state.name} name="name" onChange={inputValueHandler} className='form-control new-post-label' placeholder='Qanday kino?' />
 				<input type='number' value={state.views} name='views' onChange={inputValueHandler} className='form-control new-post-label' placeholder="Nechi marotaba ko'rilgan?" />
 
 				<button type='submit' className='btn btn-outline-dark'>
@@ -46,7 +46,7 @@ const MoviesAddForm = ({addForm}) => {
 // 	constructor(props){
 // 		super(props);
 // 		this.state = {
-// 			filmName: "",
+// 			name: "",
 // 			views: "",
 // 		}
 // 	}
@@ -59,21 +59,21 @@ const MoviesAddForm = ({addForm}) => {
 
 // 	addFormHandler = (e) => {
 // 		e.preventDefault();
-// 		this.props.addForm({filmName:this.state.filmName,views: this.state.views, id: uuidv4(), favourite:false, like: false})
+// 		this.props.addForm({name:this.state.name,views: this.state.views, id: uuidv4(), favourite:false, like: false})
 // 		this.setState({
-// 			filmName: "",
+// 			name: "",
 // 			views: "",
 // 		})
 // 	}
 
 // 	render() {
-// 		const {filmName,views} = this.state;
+// 		const {name,views} = this.state;
 		
 // 		return (
 // 			<div className='app-add-form'>
 // 				<h3>Yangi kino qo'shish</h3>
 // 				<form className='add-form d-flex' onSubmit={this.addFormHandler}>
-// 					<input type='text' value={filmName} name="filmName" onChange={this.inputValueHandler} className='form-control new-post-label' placeholder='Qanday kino?' />
+// 					<input type='text' value={name} name="name" onChange={this.inputValueHandler} className='form-control new-post-label' placeholder='Qanday kino?' />
 // 					<input type='number' value={views} name='views' onChange={this.inputValueHandler} className='form-control new-post-label' placeholder="Nechi marotaba ko'rilgan?" />
 	
 // 					<button type='submit' className='btn btn-outline-dark'>
