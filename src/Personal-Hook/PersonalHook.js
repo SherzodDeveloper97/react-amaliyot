@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // hook:
 import useInputValidation from '../hook/useInputValidate';
 
+const MyButton = ({children}) => <button className="mt-3 btn btn-success">{children}</button>
 
 const PersonalHook = () => {
     // const [firstname, setFirstname] = useState("");
@@ -35,7 +36,7 @@ const PersonalHook = () => {
                 <input type="text" className={`form-control ${firstname.validateColor}`} onChange={firstname.onChange} placeholder='Firstname' value={firstname.value} />
                 <input type="text" className={`form-control ${lastname.validateColor}`} onChange={lastname.onChange} placeholder='Lastname' value={lastname.value} />
             </div>
-            <button className="mt-3 btn btn-success">Send data</button>
+            <MyButton>Send data</MyButton>
         </div>
     </div>
   )

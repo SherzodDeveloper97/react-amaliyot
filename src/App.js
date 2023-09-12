@@ -1,16 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import './App.scss';
 import AppInfo from "./components/app-info/app-info";
 import SearchPanel from "./components/search-panel/search-panel";
 import AppFilter from "./components/app-filter/app-filter";
 import MovieList from "./components/movie-list/movie-list";
 import MoviesAddForm from "./components/movies-add-form/movies-add-form";
+import { Context } from "./context";
 
 const App = () => {
   const [data, setData] = useState([]);
   const [term, setTerm] = useState("");
   const [filter, setFilter] = useState("all");
   const [isLoading, setIsLoading] = useState(false);
+
+  const {state, dispatch} = useContext(Context);
+  // console.log(state);
 
   const onDelete = (id) => {
     const newArr = data.filter(c => c.id !== id);
@@ -67,6 +71,7 @@ const App = () => {
         const newArr = json.map(item => ({name: item.title, id: item.id, views: item.id * 10,favourite:false,like: false,}))
         console.log(newArr);
         setData(newArr);
+        dispatch({type: "GET_DATA", payload: newArr})
       })
       .finally(() => setIsLoading(false))
   }, [])
